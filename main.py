@@ -3,6 +3,8 @@ from simple_ask import response_gpt
 from summarize import summarize
 from image_gpt import get_image
 
+from for_project import refrigeratorSummarize
+
 app = Flask(__name__)
 
 
@@ -34,6 +36,14 @@ def image():
   mood = request_data["mood"]
   result = get_image(topic, mood)
   data = {"response": result}
+  return jsonify(data)
+
+
+@app.route("/refrigeratorSummarize", methods=["POST"])
+def refrigerator():
+  request_data = request.get_json()
+  text = request_data["text"]
+  data = {"response": refrigeratorSummarize(text)}
   return jsonify(data)
 
 
